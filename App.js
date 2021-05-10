@@ -1,21 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text, StatusBar } from 'react-native';
+import styled from 'styled-components/native';
+import lista from './src/lista';
 
-export default function App() {
+
+const Page = styled.SafeAreaView`
+  flex:1;
+`;
+const Scroll = styled.ScrollView`
+  flex:1;
+`;
+const Item = styled.View`
+  padding:10px;
+`;
+const ItemText = styled.Text`
+  font-size:15px;
+`;
+
+
+
+export default () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Page>
+
+      {/* BARRA DE STATUS   */}
+      <StatusBar>
+        barStyle = "dark-content"
+        hidden = {false}
+        backgroundColor = "#0066CC"
+        translucent = {false}
+        networkActivityIndicatorVisible = {true}
+      </StatusBar>
+
+      <Scroll>
+        {lista.map((item, index) => {
+          return (
+            <Item key={index}>
+              <ItemText>{item.task}</ItemText>
+            </Item>
+          );
+        })}
+      </Scroll>
+    </Page>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
